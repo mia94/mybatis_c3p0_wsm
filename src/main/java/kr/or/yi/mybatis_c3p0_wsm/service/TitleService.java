@@ -30,7 +30,7 @@ public class TitleService implements TitleDao {
 	public int insertTitle(Title title) {
 		log.debug("insertTitle()");
 		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			int res = sqlSession.insert(namespace + ".insertTitle",title);
+			int res = sqlSession.insert(namespace + ".insertTitle", title);
 			sqlSession.commit();
 			return res;
 		}
