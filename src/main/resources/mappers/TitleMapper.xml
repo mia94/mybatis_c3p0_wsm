@@ -2,6 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.yi.mybatis_c3p0_wsm.dao.TitleDao">
 	<insert id="insertTitle" parameterType="Title">
-		INSERT INTO title(code, name)	VALUES(#{code}, #{name});
+		INSERT INTO title(code,
+		name) VALUES(#{code}, #{name});
 	</insert>
+
+	<select id="selectTitleByAll" resultType="Title">
+		SELECT code, name
+		FROM mybatis_study.title;
+	</select>
+
+	<select id="selectTitleByCode" resultType="Title"
+		parameterType="Title">
+		SELECT code, name
+		FROM mybatis_study.title
+		where code=#{code};
+	</select>
+
+	<delete id="deleteTitle">
+		DELETE FROM mybatis_study.title
+		WHERE code=#{param1};
+	</delete>
+
+	<update id="updateTitle" parameterType="Title">
+		UPDATE mybatis_study.title
+		SET name=#{name}
+		WHERE code=#{code};
+	</update>
 </mapper>
