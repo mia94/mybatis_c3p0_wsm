@@ -1,19 +1,15 @@
-package kr.or.yi.mybatis_c3p0_wsm.service;
+package kr.or.yi.mybatis_c3p0_wsm.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.yi.mybatis_c3p0_wsm.dao.TitleDao;
 import kr.or.yi.mybatis_c3p0_wsm.dto.Title;
 import kr.or.yi.mybatis_c3p0_wsm.jdbc.MyBatisSqlSessionFactory;
 
-public class TitleService implements TitleDao {
-	private String namespace = "kr.or.yi.mybatis_c3p0_wsm.dao.TitleDao";
-	private static final Log log = LogFactory.getLog(TitleService.class);
-	
+public class TitleDaoImpl implements TitleDao {
+	private static final String namespace = "kr.or.yi.mybatis_c3p0_wsm.dao.TitleDao";
+		
 	@Override
 	public List<Title> selectTitleByAll() {
 		// TODO Auto-generated method stub
@@ -28,16 +24,15 @@ public class TitleService implements TitleDao {
 
 	@Override
 	public int insertTitle(Title title) {
-		log.debug("insertTitle()");
-		try(SqlSession sqlSession = MyBatisSqlSessionFactory.openSession()){
-			int res = sqlSession.insert(namespace + ".insertTitle", title);
-			sqlSession.commit();
+		try(SqlSession sqlsession = MyBatisSqlSessionFactory.openSession()){
+			int res = sqlsession.insert(namespace + ".insertTitle",title);
+			sqlsession.commit();
 			return res;
 		}
 	}
 
 	@Override
-	public int deleteTitle(Title title) {
+	public int deleteTitle(int code) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -49,21 +44,3 @@ public class TitleService implements TitleDao {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
